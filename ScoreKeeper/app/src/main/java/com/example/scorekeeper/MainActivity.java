@@ -1,19 +1,24 @@
 package com.example.scorekeeper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Switch switch_btn;
 
 
+    /* Here I declared variables */
     TextView t1, t2;
     Button increase1,increase2,decrease1,decrease2;
     int team1 =0;
@@ -30,6 +35,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        switch_btn=findViewById(R.id.switch_btn);
+
+        switch_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                else{
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
+        /* Here I connected all variables to their IDs */
         t1= findViewById(R.id.scoreof1);
         t2 =findViewById(R.id.scoreof2);
         increase1 = findViewById(R.id.increase1);
@@ -43,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        /* Here I made the code for increase the team1 score */
         increase1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Here I made the code for decrease the team1 score */
         decrease1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        /* Here I made the code for increase the team2 score */
         increase2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Here I made the code for decrease the team2 score */
         decrease2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
                     team2 = team2-3;
                     team2_s = String.valueOf(team2);
                     t2.setText(team2_s);
-
 
 
 
